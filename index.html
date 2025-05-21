@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mahsulot hisoblash</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    padding: 30px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  .product-card {
+    background: white;
+    max-width: 600px;
+    margin: 15px auto;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+  }
+  .product-name {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #222;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+  .product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .label {
+    color: #666;
+    font-weight: 600;
+  }
+  .value {
+    font-weight: 700;
+    color: #111;
+  }
+  .total-section {
+    max-width: 600px;
+    background: #fff;
+    margin: 25px auto 0;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #222;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<h2>Mahsulotlar ro'yxati</h2>
+
+<div class="product-card" data-id="1">
+  <div class="product-name">Olma</div>
+  <div class="product-info">
+    <div class="label">Karobkalar soni:</div>
+    <div class="value karobka">5</div>
+  </div>
+  <div class="product-info">
+    <div class="label">Dona soni (1 karobkada):</div>
+    <div class="value dona">100</div>
+  </div>
+  <div class="product-info">
+    <div class="label">Narxi (1 dona):</div>
+    <div class="value narx">1500</div>
+  </div>
+  <div class="product-info">
+    <div class="label">Umumiy hisob:</div>
+    <div class="value umumiy">0</div>
+  </div>
+</div>
+
+<div class="product-card" data-id="2">
+  <div class="product-name">Banan</div>
+  <div class="product-info">
+    <div class="label">Karobkalar soni:</div>
+    <div class="value karobka">3</div>
+  </div>
+  <div class="product-info">
+    <div class="label">Dona soni (1 karobkada):</div>
+    <div class="value dona">120</div>
+  </div>
+  <div class="product-info">
+    <div class="label">Narxi (1 dona):</div>
+    <div class="value narx">2000</div>
+  </div>
+  <div class="product-info">
+    <div class="label">Umumiy hisob:</div>
+    <div class="value umumiy">0</div>
+  </div>
+</div>
+
+<div class="total-section">
+  <div>Jami dona soni:</div>
+  <div id="total-dona">0</div>
+  <div>Jami narx (so'm):</div>
+  <div id="total-narx">0</div>
+</div>
+
+<script>
+  function hisobla() {
+    const products = document.querySelectorAll('.product-card');
+    let jamiDona = 0;
+    let jamiNarx = 0;
+
+    products.forEach(prod => {
+      const karobka = parseInt(prod.querySelector('.karobka').textContent);
+      const dona = parseInt(prod.querySelector('.dona').textContent);
+      const narx = parseInt(prod.querySelector('.narx').textContent);
+
+      const umumiyDona = karobka * dona;
+      const umumiyNarx = umumiyDona * narx;
+
+      jamiDona += umumiyDona;
+      jamiNarx += umumiyNarx;
+
+      prod.querySelector('.umumiy').textContent = umumiyNarx.toLocaleString();
+    });
+
+    document.getElementById('total-dona').textContent = jamiDona.toLocaleString();
+    document.getElementById('total-narx').textContent = jamiNarx.toLocaleString();
+  }
+
+  hisobla();
+</script>
+
+</body>
+</html>
